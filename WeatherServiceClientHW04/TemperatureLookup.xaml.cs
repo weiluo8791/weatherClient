@@ -7,7 +7,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Microsoft.Rest;
-using Newtonsoft.Json.Linq;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -22,6 +21,7 @@ namespace WeatherServiceClientHW04
         public TemperatureLookup()
         {
             InitializeComponent();
+            //itemsource for combo box 
             List<string> timeTypeSource = new List<string>
             {
                 "year",
@@ -29,17 +29,29 @@ namespace WeatherServiceClientHW04
                 "week",
                 "day"
             };
-
+            //set the itemsource for combo box
             TimeComboBox.ItemsSource = timeTypeSource;
+            //set the default to year
             TimeComboBox.SelectedItem = timeTypeSource[0];
+            //set the placehodertext to year
             TimeTextBox.PlaceholderText = timeTypeSource[0];
         }
 
+        /// <summary>
+        /// going back to main page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackMain_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage), null);
         }
 
+        /// <summary>
+        /// Change placeholder text depends on combo box selected value
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TimeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (TimeComboBox.SelectedValue != null) IntervalType = TimeComboBox.SelectedValue.ToString();
@@ -63,10 +75,16 @@ namespace WeatherServiceClientHW04
             }
         }
 
-        private async void ViewButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Get average, high, low temperature for a time period
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
             WeatherServiceHW04 clientSdk = new WeatherServiceHW04();
             Task<HttpOperationResponse<string>> resultTask = null;
+            //check whick radio button is selected within the same stackpanel
             List<RadioButton> radioButtons = DegreeTypeStackPanel.Children.OfType<RadioButton>().ToList();
             RadioButton rbTarget = radioButtons.First(r => r.IsChecked != null && (bool)r.IsChecked);
             string whichType = (string)rbTarget.Content;
@@ -76,6 +94,7 @@ namespace WeatherServiceClientHW04
                 StatusTextBlock.Text = "GET Request Made, waiting for response...";
                 StatusTextBlock.Foreground = new SolidColorBrush(Colors.White);
                 StatusBorder.Background = new SolidColorBrush(Colors.Blue);
+                //init result text box
                 OutTextBlock.Text = string.Empty;
 
                 // Let the user know something happening
@@ -103,7 +122,6 @@ namespace WeatherServiceClientHW04
                 if (resultTask != null)
                 {
                     resultTask.Wait();
-
                     StatusBorder.Background = new SolidColorBrush(Colors.Green);
                     StatusTextBlock.Text = "Request completed!";
 
@@ -122,16 +140,6 @@ namespace WeatherServiceClientHW04
                         OutTextBlock.Text = "Nothing returned!";
                     }
                 }
-            }
-            catch (HttpOperationException ex)
-            {
-                // Display the exception message
-                string responseMsg = await ex.Response.Content.ReadAsStringAsync();
-                JObject o = JObject.Parse(responseMsg);
-                string messageResult = o.Value<string>("message");
-                OutTextBlock.Text = messageResult;
-                StatusTextBlock.Text = ex.Message;
-                StatusBorder.Background = new SolidColorBrush(Colors.Red);
             }
             catch (Exception ex)
             {

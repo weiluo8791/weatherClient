@@ -2,12 +2,85 @@
     x:Class="WeatherServiceClientHW04.TemperatureLookup"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WeatherServiceClientHW04"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+      mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPointerOverForegroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BackMain"
+                    Margin="39,59,39,0"
+                    VerticalAlignment="Top"
+                    AutomationProperties.AutomationId="BackButton"
+                    AutomationProperties.ItemType="Navigation Button"
+                    AutomationProperties.Name="Back"                    
+                    Style="{StaticResource NavigationBackButtonNormalStyle}" Click="BackMain_Click" Foreground="#FFF5ECEC" />
+            <ProgressBar Name="progressBar"
+                         Grid.Column="1"
+                         Height="8"
+                         Margin="0,133,0,-1"
+                         Background="Transparent" />
+        </Grid>
+
+
+        <Border Grid.Row="1"
+                Width="600"
+                Height="291"
+                Margin="198,157,226,0"
+                HorizontalAlignment="Center"
+                BorderBrush="Azure"
+                BorderThickness="2"
+                Padding="5,0,0,0" VerticalAlignment="Top">
+            <TextBlock Name="OutTextBlock"
+                       FontSize="22"
+                       Foreground="Yellow"
+                       TextWrapping="WrapWholeWords" Margin="0.667,9,-0.333,-9.667" />
+        </Border>
+
+        <Border Name="StatusBorder"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom">
+
+            <TextBlock Name="StatusTextBlock"
+                       Margin="10,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="20"
+                       Text="..."
+                       TextWrapping="Wrap" />
+        </Border>
+        
+        <StackPanel HorizontalAlignment="Center" Height="52" Margin="0,99,-1,0" Grid.Row="1" VerticalAlignment="Top" Width="1025" Orientation="Horizontal">
+            <TextBox x:Name="TimeTextBox" TextWrapping="Wrap" Text="" Width="373" Margin="200,0,0,0" PlaceholderText=""/>
+            <ComboBox x:Name="TimeComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="174" RenderTransformOrigin="0.5,0.5" SelectionChanged="TimeComboBox_SelectionChanged">
+
+            </ComboBox>
+            <Button x:Name="ViewButton" Content="View" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="#FFF5F1F9" Click="ViewButton_Click"/>
+        </StackPanel>
+        
+        <StackPanel x:Name="DegreeTypeStackPanel" Orientation="Horizontal" Height="66" Margin="1,139,0,0" Width="1022" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <RadioButton x:Name="AverageRadioButton" Content="Average" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="330,0,0,0" Foreground="#FFF70404" GroupName="DegreeType" IsChecked="True"/>
+            <RadioButton x:Name="HighRadioButton" Content="High" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FF06F7E1" GroupName="DegreeType"/>
+            <RadioButton x:Name="LowRadioButton" Content="Low" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#FFF5A00B" GroupName="DegreeType"/>
+
+        </StackPanel>
 
     </Grid>
+
 </Page>

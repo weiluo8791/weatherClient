@@ -60,22 +60,6 @@
                          Background="Transparent" />
         </Grid>
 
-        <Button Name="WeatherInput"
-                Grid.Row="1"
-                Width="293"
-                Height="58"
-                Margin="161,118,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="WeatherInput_Click"
-                Content="Weather Input"
-                FontSize="20" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
-            <Button.Flyout>
-                <DatePickerFlyout/>
-            </Button.Flyout>
-
-        </Button>
-
 
         <Border Name="StatusBorder"
                 Grid.Row="1"
@@ -90,20 +74,19 @@
                        TextWrapping="Wrap" />
         </Border>
 
-        <Button x:Name="WeatherView"
-                Grid.Row="1"
+        <Button x:Name="TemperatureLookup"
                 Width="293"
                 Height="58"
-                Margin="642,123,0,0"
-                HorizontalAlignment="Left"
+                Margin="355,60,376,0"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Click="WeatherView_Click"
-                Content="Weather View"
-                FontSize="20" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
+                Click="TemperatureLookup_Click"
+                Content="Temperature Lookup"
+                FontSize="20" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="1" />
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,27,0,-1">
 
-            <Grid x:Name="Profile" Margin="87,214,244,28.4" Width="896">
+            <Grid x:Name="InputGrid" Margin="87,214,244,28.4" Width="896">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -116,21 +99,22 @@
                     <ColumnDefinition Width="298*"/>
 
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Value" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock x:Name="ValueTextBox" Grid.Row="0" Grid.Column="0" Text="Degree" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <TextBox x:Name="Value" Grid.Row="0" Grid.Column="1" Text="" FontSize="20" VerticalAlignment="Center"/>
-                <ComboBox x:Name="DegreeType" Grid.Row="0" Grid.Column="2" SelectedValue="{Binding dType, Mode=OneWay}" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                <ComboBox x:Name="DegreeType" Grid.Row="0" Grid.Column="2" SelectedValue="{Binding dType}" FontSize="20" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Date" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Record Date" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <DatePicker x:Name="valueDate" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
                 <TimePicker x:Name="valueTime" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Stretch"/>
 
                 <Button x:Name="Submit" Grid.Column="2" Grid.Row="2" Content="Submit" FontSize="20" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch" Click="Submit_Click" />
             </Grid>
+
         </StackPanel>
 
-        <RadioButton x:Name="radioButton" Content="Humidity" HorizontalAlignment="Left" Margin="150,1,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="#FF08BEDA"/>
-        <RadioButton x:Name="radioButton1" Content="Temperature" HorizontalAlignment="Left" Margin="300,0,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FF33EA0B"/>
-        <RadioButton x:Name="radioButton2" Content="Pressure" HorizontalAlignment="Left" Margin="450,1,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFDE0909"/>
+        <RadioButton x:Name="HumidityRadioButton" Content="Humidity" HorizontalAlignment="Left" Margin="199,185,0,0" VerticalAlignment="Top" Grid.Row="1" Foreground="#FF08BEDA" GroupName="ValueType" Checked="HumidityChoice_Checked"/>
+        <RadioButton x:Name="TemperatureRadioButton" Content="Temperature" HorizontalAlignment="Left" Margin="349,184,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FF33EA0B" GroupName="ValueType" IsChecked="True" Checked="TemperatureChoice_Checked"/>
+        <RadioButton x:Name="PressureRadioButton" Content="Pressure" HorizontalAlignment="Left" Margin="499,185,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="#FFDE0909" GroupName="ValueType" Checked="PressureCHoice_Checked"/>
 
     </Grid>
 </Page>

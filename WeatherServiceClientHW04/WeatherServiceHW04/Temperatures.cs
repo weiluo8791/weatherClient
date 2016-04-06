@@ -256,7 +256,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Temperature>> GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<string>> GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (type == null)
@@ -336,14 +336,14 @@ namespace WeatherServiceClientHW04
             }
             
             // Create Result
-            HttpOperationResponse<Temperature> result = new HttpOperationResponse<Temperature>();
+            HttpOperationResponse<string> result = new HttpOperationResponse<string>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                Temperature resultModel = new Temperature();
+                string resultModel = default(string);
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -351,7 +351,7 @@ namespace WeatherServiceClientHW04
                 }
                 if (responseDoc != null)
                 {
-                    resultModel.DeserializeJson(responseDoc);
+                    resultModel = responseDoc.ToString(Newtonsoft.Json.Formatting.Indented);
                 }
                 result.Body = resultModel;
             }
@@ -372,7 +372,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Temperature>> GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<string>> GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (type == null)
@@ -452,14 +452,14 @@ namespace WeatherServiceClientHW04
             }
             
             // Create Result
-            HttpOperationResponse<Temperature> result = new HttpOperationResponse<Temperature>();
+            HttpOperationResponse<string> result = new HttpOperationResponse<string>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                Temperature resultModel = new Temperature();
+                string resultModel = default(string);
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -467,7 +467,7 @@ namespace WeatherServiceClientHW04
                 }
                 if (responseDoc != null)
                 {
-                    resultModel.DeserializeJson(responseDoc);
+                    resultModel = responseDoc.ToString(Newtonsoft.Json.Formatting.Indented);
                 }
                 result.Body = resultModel;
             }
@@ -488,7 +488,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Temperature>> GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<string>> GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
             if (type == null)
@@ -568,14 +568,14 @@ namespace WeatherServiceClientHW04
             }
             
             // Create Result
-            HttpOperationResponse<Temperature> result = new HttpOperationResponse<Temperature>();
+            HttpOperationResponse<string> result = new HttpOperationResponse<string>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                Temperature resultModel = new Temperature();
+                string resultModel = default(string);
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -583,7 +583,7 @@ namespace WeatherServiceClientHW04
                 }
                 if (responseDoc != null)
                 {
-                    resultModel.DeserializeJson(responseDoc);
+                    resultModel = responseDoc.ToString(Newtonsoft.Json.Formatting.Indented);
                 }
                 result.Body = resultModel;
             }

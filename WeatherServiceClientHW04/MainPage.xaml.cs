@@ -1,22 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text.RegularExpressions;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Newtonsoft.Json.Linq;
 using WeatherServiceClientHW04.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -30,52 +15,88 @@ namespace WeatherServiceClientHW04
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             List<string> dSource = new List<string>
             {
                 "Fahrenheit",
                 "Celsius"
             };
             DegreeType.ItemsSource = dSource;
+            DegreeType.SelectedItem = dSource[0];
         }
 
-        private void WeatherInput_Click(object sender, RoutedEventArgs e)
+        private void TemperatureLookup_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void WeatherView_Click(object sender, RoutedEventArgs e)
-        {
-
+            Frame.Navigate(typeof(TemperatureLookup), null);
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            WeatherServiceHW04 clientSDK = new WeatherServiceHW04();
+            WeatherServiceHW04 clientSdk = new WeatherServiceHW04();
 
-            string dateTimeString = "";
-            DateTime dateTime = DateTime.MinValue;
-            decimal? value = null;
-
-
+            DateTime dateTime;
+            decimal? value;
             string date = DateTime.Parse(valueDate.Date.ToString()).ToString("MM/dd/yyyy");
             string time = DateTime.Parse(valueTime.Time.ToString()).ToString("h:mm tt");
-            dateTimeString = date + " " + time;
+            var dateTimeString = date + " " + time;
             dateTime = DateTime.Parse(dateTimeString);
-            if ((string) DegreeType.SelectedValue == "Celsius")
-            {
-                value =  (decimal?) (9.0 / 5.0 * (double) (decimal.Parse(Value.Text))) + 32;
-            }
-            else value = Decimal.Parse(Value.Text);
-
-            Temperature temp = new Temperature()
-            {
-                Degree = value.ToString(),
-                RecorDateTime = dateTime
-            };
-
-            var resultTask = clientSDK.Temperatures.PostTemperatureByTemperatureWithOperationResponseAsync(temp);
             
+            if (TemperatureRadioButton.IsChecked != null && (bool)TemperatureRadioButton.IsChecked)
+            {
+
+                if ((string) DegreeType.SelectedValue == "Celsius")
+                {
+                    value = (decimal?) (9.0/5.0*(double) (decimal.Parse(Value.Text))) + 32;
+                }
+                else value = Decimal.Parse(Value.Text);
+
+                Temperature temp = new Temperature()
+                {
+                    Degree = value.ToString(),
+                    RecorDateTime = dateTime
+                };
+
+               var resultTask = clientSdk.Temperatures.PostTemperatureByTemperatureWithOperationResponseAsync(temp);
+            }
+            if (HumidityRadioButton.IsChecked != null && (bool)HumidityRadioButton.IsChecked)
+            {
+                value = Decimal.Parse(Value.Text);
+                Humidity humi = new Humidity()
+                {
+                    Percentage = value.ToString(),
+                    RecorDateTime = dateTime
+                };
+                var resultTask = clientSdk.Humidities.PostHumidityByHumidityWithOperationResponseAsync(humi);
+            }
+            if (PressureRadioButton.IsChecked != null && (bool)PressureRadioButton.IsChecked)
+            {
+                value = Decimal.Parse(Value.Text);
+                Pressure pres = new Pressure()
+                {
+                    Millibar = value.ToString(),
+                    RecorDateTime = dateTime
+                };
+                var resultTask = clientSdk.Pressures.PostPressureByPressureWithOperationResponseAsync(pres);
+            }
+
+        }
+
+        private void HumidityChoice_Checked(object sender, RoutedEventArgs e)
+        {
+            ValueTextBox.Text = "Percentage";
+            DegreeType.Visibility = Visibility.Collapsed;
+        }
+
+        private void TemperatureChoice_Checked(object sender, RoutedEventArgs e)
+        {
+            ValueTextBox.Text = "Degree";
+            DegreeType.Visibility = Visibility.Visible;
+        }
+
+        private void PressureCHoice_Checked(object sender, RoutedEventArgs e)
+        {
+            ValueTextBox.Text = "Percentage";
+            DegreeType.Visibility = Visibility.Collapsed;
         }
     }
 }

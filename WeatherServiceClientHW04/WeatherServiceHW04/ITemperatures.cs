@@ -35,7 +35,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Temperature>> GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<string>> GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         
         /// <param name='type'>
         /// Required.
@@ -46,7 +46,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Temperature>> GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<string>> GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         
         /// <param name='type'>
         /// Required.
@@ -57,7 +57,7 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Temperature>> GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        Task<HttpOperationResponse<string>> GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         
         /// <param name='id'>
         /// Required.

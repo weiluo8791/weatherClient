@@ -77,7 +77,7 @@ namespace WeatherServiceClientHW04
         /// <param name='period'>
         /// Required.
         /// </param>
-        public static Temperature GetAverageTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
+        public static string GetAverageTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
         {
             return Task.Factory.StartNew((object s) => 
             {
@@ -98,9 +98,9 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public static async Task<Temperature> GetAverageTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public static async Task<string> GetAverageTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Microsoft.Rest.HttpOperationResponse<WeatherServiceClientHW04.Models.Temperature> result = await operations.GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
+            Microsoft.Rest.HttpOperationResponse<string> result = await operations.GetAverageTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
         
@@ -113,7 +113,7 @@ namespace WeatherServiceClientHW04
         /// <param name='period'>
         /// Required.
         /// </param>
-        public static Temperature GetHighTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
+        public static string GetHighTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
         {
             return Task.Factory.StartNew((object s) => 
             {
@@ -134,9 +134,9 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public static async Task<Temperature> GetHighTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public static async Task<string> GetHighTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Microsoft.Rest.HttpOperationResponse<WeatherServiceClientHW04.Models.Temperature> result = await operations.GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
+            Microsoft.Rest.HttpOperationResponse<string> result = await operations.GetHighTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
         
@@ -149,7 +149,7 @@ namespace WeatherServiceClientHW04
         /// <param name='period'>
         /// Required.
         /// </param>
-        public static Temperature GetLowTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
+        public static string GetLowTemperatureByTypeAndPeriod(this ITemperatures operations, string type, int period)
         {
             return Task.Factory.StartNew((object s) => 
             {
@@ -170,9 +170,9 @@ namespace WeatherServiceClientHW04
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public static async Task<Temperature> GetLowTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public static async Task<string> GetLowTemperatureByTypeAndPeriodAsync(this ITemperatures operations, string type, int period, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Microsoft.Rest.HttpOperationResponse<WeatherServiceClientHW04.Models.Temperature> result = await operations.GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
+            Microsoft.Rest.HttpOperationResponse<string> result = await operations.GetLowTemperatureByTypeAndPeriodWithOperationResponseAsync(type, period, cancellationToken).ConfigureAwait(false);
             return result.Body;
         }
         

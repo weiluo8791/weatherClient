@@ -102,9 +102,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemperatureLookup.xaml.cs">
-      <DependentUpon>TemperatureLookup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WeatherServiceHW04\Humidities.cs" />
     <Compile Include="WeatherServiceHW04\HumiditiesExtensions.cs" />
     <Compile Include="WeatherServiceHW04\IHumidities.cs" />
@@ -123,6 +120,9 @@
     <Compile Include="WeatherServiceHW04\TemperaturesExtensions.cs" />
     <Compile Include="WeatherServiceHW04\WeatherServiceHW04.cs" />
     <Compile Include="WeatherServiceHW04\WeatherServiceHW04Extensions.cs" />
+    <Compile Include="TemperatureLookup.xaml.cs">
+      <DependentUpon>TemperatureLookup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
